@@ -13,4 +13,6 @@ public interface Cafetiere {
 
     void arreter();
 
+
+
 }

@@ -13,4 +13,6 @@ public interface Sonnerie {
     void declencher() throws IOException;
 
     void arreter();
+
+
 }

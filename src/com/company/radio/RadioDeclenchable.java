@@ -1,8 +1,6 @@
 package com.company.radio;
 import com.company.Declenchable;
 
-import java.io.IOException;
-
 /*
     Author : Julien GODEST / Julie HUA
     File : RadioDeclenchable.java
@@ -14,18 +12,24 @@ public class RadioDeclenchable  extends Declenchable implements Radio { // Radio
 
    RadioClass maRadio;
     public RadioDeclenchable(){
-        this.maRadio = new RadioClass();
+        this.maRadio = new RadioClass(0);
     }
 
     @Override
-    public void declencher() {
+    public void  declencher() {
         maRadio.declencher();
+
     }// 5 : on est ici, il va utiliser le declencher de RadioClass
 
 
     @Override
     public void arreter() {
         maRadio.arreter();
+    }
+
+    @Override
+    public int getM() {
+        return maRadio.getM();
     }
 
 

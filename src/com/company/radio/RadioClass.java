@@ -8,11 +8,26 @@ package com.company.radio;
 */
 
 public class RadioClass implements Radio {
-    int m; // RadioClass et RadioDeclenchable utilisent l'interface
+    private int m; // RadioClass et RadioDeclenchable utilisent l'interface
 
-    public void declencher() {
-        m = 1;
-        System.out.println("Activation de la radio : Station SkyRock 100.2 lancée"); // 6 : on est ici, on a le code concret. Radio activé !!!
+    public RadioClass(int m){
+       this.m = m;
+    }
+
+    public void  declencher() {
+        this.m = 1;
+        System.out.println("Activation de la radio : Station SkyRock 100.2 lancée");
+
+       // 6 : on est ici, on a le code concret. Radio activé !!!
+    }
+
+    public int getM() {
+
+
+
+        return m;
+        //return m;
+
     }
 
     public void arreter() {

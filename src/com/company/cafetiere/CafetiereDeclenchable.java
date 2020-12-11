@@ -12,7 +12,7 @@ public class CafetiereDeclenchable  extends Declenchable implements Cafetiere { 
 
     CafetiereClass monCafe;
     public CafetiereDeclenchable(){
-        this.monCafe = new CafetiereClass();
+        this.monCafe = new CafetiereClass(0);
     }
 
     @Override
@@ -24,5 +24,12 @@ public class CafetiereDeclenchable  extends Declenchable implements Cafetiere { 
     @Override
     public void arreter() {
         monCafe.arreter();
+    }
+
+    @Override
+    public int  getM() {
+
+          return  monCafe.getM();
+
     }
 }

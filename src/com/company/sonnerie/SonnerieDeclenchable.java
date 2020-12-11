@@ -13,7 +13,8 @@ public class SonnerieDeclenchable  extends Declenchable implements Sonnerie { //
 
     SonnerieClass maSonnerie;
     public SonnerieDeclenchable(){
-        this.maSonnerie = new SonnerieClass();
+
+        this.maSonnerie = new SonnerieClass(0);
     }
 
     @Override
@@ -25,5 +26,12 @@ public class SonnerieDeclenchable  extends Declenchable implements Sonnerie { //
     @Override
     public void arreter() {
         maSonnerie.arreter();
+    }
+
+    public int getM() {
+
+       // maSonnerie.getM();
+
+        return maSonnerie.getM();
     }
 }

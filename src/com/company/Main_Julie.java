@@ -1,14 +1,19 @@
 package com.company;
 
 import com.company.cafetiere.CafetiereDeclenchable;
+import com.company.radio.RadioClass;
 import com.company.radio.RadioDeclenchable;
 import com.company.sonnerie.SonnerieDeclenchable;
+import sun.java2d.cmm.lcms.LcmsServiceProvider;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.concurrent.TimeUnit;
 
 
 public class Main_Julie extends JFrame {
@@ -23,6 +28,11 @@ public class Main_Julie extends JFrame {
     private JCheckBox CheckBoxCafe;
     private JLabel LHeureActuelle;
     private JLabel Fmessage_reveil;
+    private JLabel LRadio;
+    private JLabel LSonnerie;
+    private JLabel LCafe;
+    private JCheckBox arrêterLaRadioCheckBox;
+    private JCheckBox arrêterLaSonnerieCheckBox;
     private JTextField TFHeureActuelle;
     private static boolean pasDeBoutonAppuyé = true;
     static int hReveil = 0;
@@ -54,6 +64,13 @@ public class Main_Julie extends JFrame {
         lancerLeRéveilButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                arrêterLaRadioCheckBox.setVisible(false);
+                arrêterLaSonnerieCheckBox.setVisible(false);
+                Fmessage_reveil.setText("");
+                LCafe.setText("");
+                LRadio.setText("");
+                LSonnerie.setText(""); 
+
 
                 hReveil = new Integer(CBHeure.getSelectedItem().toString()); // récupération de la valeur de l'heure du réveil
                 mReveil = new Integer(CBMinute.getSelectedItem().toString());
@@ -76,6 +93,9 @@ public class Main_Julie extends JFrame {
 
 
         });
+        arrêterLaRadioCheckBox.setVisible(false);
+        arrêterLaSonnerieCheckBox.setVisible(false);
+
 
         this.setVisible(true);
 
@@ -96,7 +116,7 @@ public class Main_Julie extends JFrame {
 
             // Radio
             RadioDeclenchable radio = new RadioDeclenchable();
-            //reveil.addDeclenchable(radio);
+            //            //reveil.addDeclenchable(radio);
 
             // cafetière
             CafetiereDeclenchable cafetiere = new CafetiereDeclenchable();
@@ -125,42 +145,67 @@ public class Main_Julie extends JFrame {
             while (!reveil.isActive) {
                 LHeureActuelle.setText(montre.afficher());
                 reveil.incrementer();
-            }
+        }
 
-
-            while(reveil.isActive) {
+            if(reveil.isActive) {
               LHeureActuelle.setText(montre.afficher());
               montre.tourner();
 
+              /*if(test.getM()==1) {
+                  System.out.println("ok"); 
+              }*/
 
-                    if (addSonnerie && !addCafetiere && !addRadio) {
+            System.out.println(radio.getM());
 
+            if(radio.getM()==1){
+                LRadio.setText("Activation de la radio : Station SkyRock 100.2 lancée");
+                arrêterLaRadioCheckBox.setVisible(true);
+
+            }
+
+            if(cafetiere.getM()==1){
+                LCafe.setText("Cafetière activé");
+
+
+
+            }
+
+                if(sonnerie.getM()==1){
+                    LSonnerie.setText("ring ring ring");
+                    arrêterLaSonnerieCheckBox.setVisible(true);
+                }
+
+
+                arrêterLaRadioCheckBox.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        System.out.println("julie");
+                        LRadio.setText("radio arrete");
+                        Fmessage_reveil.setText("");
 
 
                     }
-                    if (addSonnerie && addRadio && !addCafetiere) {
-
-
+                });
+                arrêterLaSonnerieCheckBox.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        System.out.println("hua");
+                        LSonnerie.setText("sonnerie arrete");
+                        Fmessage_reveil.setText("");
                     }
-                    if (addSonnerie && !addRadio && addCafetiere) {
+                });
 
-                    }
-                    if (!addSonnerie && addRadio && !addCafetiere) {
-                        Fmessage_reveil.setText("la radio est allumé");
 
-                        // si que radio
+             /* if(addSonnerie) {
 
-                    }
-                    if (!addSonnerie && !addRadio && addCafetiere) {
 
-                    }
-                    if (!addSonnerie && addRadio && addCafetiere) {
-                        reveil.addDeclenchable(radio, cafetiere);
-                    }
+              }
+              if(addCafetiere){
 
-                    if (addSonnerie && addRadio && addCafetiere) {
+              }
+              if(addSonnerie){
 
-                    }
+              }*/ // we don't cheat anymore LMAO
                 }
 
 
@@ -171,7 +216,10 @@ public class Main_Julie extends JFrame {
         }
 
 
+
     }
+
+
 
 
 

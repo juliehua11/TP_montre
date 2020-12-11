@@ -11,21 +11,38 @@ import java.io.InputStreamReader;
 */
 
 
-public class SonnerieClass implements Sonnerie { // SonnerieClass et SonnerieDeclenchable utilisent l'interface
+public class SonnerieClass implements Sonnerie {
+
+    private int m ;
+
+    public SonnerieClass(int m) {
+        this.m = m;
+    }
+
+    // SonnerieClass et SonnerieDeclenchable utilisent l'interface
 
     public void declencher() throws IOException {
+        this.m = 1;
         System.out.println("Ring ring ring..."); // 6 : on est ici, on a le code concret. Sonnerie activé !!!
-        System.out.println("Si voulez arreter la sonnerie, tapez y + entrer");
+        /*System.out.println("Si voulez arreter la sonnerie, tapez y + entrer");
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String s = br.readLine();
         while(!s.equals("y")) { // Tant que l'utilisateur n'éteints pas le reveil, il continue de sonner
             System.out.println("Ring Ring Ring");
             s = br.readLine();
-        }
+        }*/
     }
 
     public void arreter() {
         System.out.println("Sonnerie arretée.");
     }
+
+    public int getM() {
+
+        System.out.print(m);
+        return m;
+
+    }
+
 
 }
