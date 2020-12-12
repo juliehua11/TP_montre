@@ -1,24 +1,37 @@
 package com.company;
+
 import com.company.cafetiere.CafetiereDeclenchable;
 import com.company.radio.RadioDeclenchable;
 import com.company.sonnerie.SonnerieDeclenchable;
+
 import javax.swing.*;
 import java.awt.*;
-
-/*
-    Author : Julien GODEST / Julie HUA
-    File : Main.java
-    Date : 01/11/2020
-    La classe Main initialise les objets et démarre le programme.
-*/
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
-public class Main extends JFrame{
 
+public class Main extends JFrame {
+
+    private JPanel rootPanel;
+    private JButton lancerLeRéveilButton;
+    private JComboBox CBHeure;
+    private JComboBox CBMinute;
+    private JComboBox CBSeconde;
+    private JCheckBox CheckBoxSonnerie;
+    private JCheckBox CheckBoxRadio;
+    private JCheckBox CheckBoxCafe;
+    private JLabel LHeureActuelle;
+    private JLabel Fmessage_reveil;
+    private JLabel LRadio;
+    private JLabel LSonnerie;
+    private JLabel LCafe;
+    private JCheckBox arrêterLaRadioCheckBox;
+    private JCheckBox arrêterLaSonnerieCheckBox;
+    private JTextField TFHeureActuelle;
     private static boolean pasDeBoutonAppuyé = true;
     static int hReveil = 0;
     static int mReveil = 0;
@@ -26,184 +39,206 @@ public class Main extends JFrame{
     static Boolean addSonnerie = false;
     static Boolean addRadio = false;
     static Boolean addCafetiere = false;
+    static Boolean composant_click =false;
 
     public static void main(String[] args) throws IOException {
+        Main main = new Main();
+    }
 
-        /*
-        ChaineCompteur chaine = new ChaineCompteur(new int[]{0, 0, 0},new int[]{0, 0, 0}, new int[] {24, 60, 60}, new int[] {1, 1, 1});
-        chaine.afficher();
-        chaine.incrementer();
-        */
+    public Main() throws IOException {
 
-        /*
-        Montre montre = new com.company.Montre();
-        montre.regler(1,20,10);
-        while(true) {
-            montre.tourner();
-        }
-        */
-        Montre montre=new Montre();
-        montre.regler( LocalDateTime.now().getHour(),LocalDateTime.now().getMinute(),LocalDateTime.now().getSecond());
+        //HeureActuelle.setBounds(100,200,500,400);
+        LHeureActuelle.setFont(new Font("Calibri", Font.BOLD, 20));
 
-        JFrame frame = new JFrame("Reveil"); // création d'une fenêtre
-        frame.setSize(600, 600);
-        frame.setLocation(0, 0);
-        frame.setAlwaysOnTop(true);
-        frame.setResizable(false);
-        frame.setLayout(null); // fin paramètre fenêtre
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // croix ferme fenêtre
-        JLabel Heure = new JLabel(); // création de l'objet heure
-        Heure.setBounds(200, 0 ,300 , 200); // placement de l'objet
-        Heure.setFont(new Font("sansserif", Font.PLAIN, 60));
-        frame.add(Heure); // ajout de l'objet dans la fenêtre
 
-        Object[] listeH= new Object[]{0, 1, 2, 3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24};  // création des selects pour heure
-        JComboBox h = new JComboBox(listeH);
-        h.setBounds(150,200,50,50);
-        frame.add(h); // ajout des heures  dans la fenêtre
 
-        Object[] listeM= new Object[]{0, 1, 2, 3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59};
-        JComboBox m = new JComboBox(listeM);
-        m.setBounds(250,200,50,50);
-        frame.add(m); // ajout des min
 
-        Object[] listeS= new Object[]{0, 1, 2, 3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59};
-        JComboBox s = new JComboBox(listeS);
-        s.setBounds(350,200,50,50);
-        frame.add(s);
+            /*final boolean[] pasDeBoutonAppuyé = {true};
+            final int[] hReveil = {0};
+            final int[] mReveil = {0};
+            final int[] sReveil = {0};
+            final boolean[] addSonnerie = {false};
+            final boolean[] addRadio = {false};
+            final boolean[] addCafetiere = {false};*/
 
-        // création des checkbox
-        JCheckBox sonnerieButton = new JCheckBox("Sonnerie");
-        sonnerieButton.setSelected(true);
-        sonnerieButton.setBounds(150,300,150,50);
-        sonnerieButton.setFont(new Font("sansserif", Font.PLAIN, 20));
-        frame.add(sonnerieButton);
+        Montre montre = new Montre();
+        montre.regler(LocalDateTime.now().getHour(), LocalDateTime.now().getMinute(), LocalDateTime.now().getSecond());
+        add(rootPanel);
+        setTitle("MY TITLE");
+        setSize(1000, 1000);
 
-        JCheckBox radioButton = new JCheckBox("Radio");
-        radioButton.setSelected(true);
-        radioButton.setBounds(150,350,150,50);
-        radioButton.setFont(new Font("sansserif", Font.PLAIN, 20));
-        frame.add(radioButton);
-
-        JCheckBox cafeButton = new JCheckBox("Café");
-        cafeButton.setSelected(true);
-        cafeButton.setBounds(150,400,150,50);
-        cafeButton.setFont(new Font("sansserif", Font.PLAIN, 20));
-        frame.add(cafeButton);
-
-        JButton BTN1 = new JButton("Lancer le reveil");
-        BTN1.setBounds(200, 460, 180, 80);
-        BTN1.addActionListener(new ActionListener() { // click sur le bouton déclenche l'évènement
+        lancerLeRéveilButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Reveil paramétré");
-                hReveil = new Integer(h.getSelectedItem().toString()); // récupération de la valeur de l'heure du réveil
-                mReveil = new Integer(m.getSelectedItem().toString());
-                sReveil = new Integer(s.getSelectedItem().toString());
-                addSonnerie = sonnerieButton.isSelected(); // récupération si checkbox true or false
-                addRadio= radioButton.isSelected();
-                addCafetiere= cafeButton.isSelected();
+                arrêterLaRadioCheckBox.setVisible(false);
+                arrêterLaSonnerieCheckBox.setVisible(false);
+                Fmessage_reveil.setText("");
+                LCafe.setText("");
+                LRadio.setText("");
+                LSonnerie.setText("");
+
+
+                hReveil = new Integer(CBHeure.getSelectedItem().toString()); // récupération de la valeur de l'heure du réveil
+                mReveil = new Integer(CBMinute.getSelectedItem().toString());
+                sReveil = new Integer(CBSeconde.getSelectedItem().toString());
+                addSonnerie = CheckBoxSonnerie.isSelected(); // récupération si checkbox true or false
+                addRadio = CheckBoxRadio.isSelected();
+                addCafetiere = CheckBoxCafe.isSelected();
                 pasDeBoutonAppuyé = false;
+                if(addSonnerie==false && addRadio==false && addCafetiere==false)  {
+                    Fmessage_reveil.setText("Vous devez sélectionner au moins un paramètre pour activé le réveil ");
+                }
+                else {
+                    composant_click = true;
+                    System.out.println("Reveil paramétré");
+                    Fmessage_reveil.setText("Réveil activé avec succès");
+                }
+
+
             }
+
+
         });
+        arrêterLaRadioCheckBox.setVisible(false);
+        arrêterLaSonnerieCheckBox.setVisible(false);
 
-        frame.add(BTN1);
 
-        frame.setVisible(true); // affichage de la fenêtre
+        this.setVisible(true);
 
-        while(pasDeBoutonAppuyé){ // si le bouton n'est pas appuyé
-            Heure.setText(montre.afficher());
+        while (pasDeBoutonAppuyé || composant_click==false) {
+
+            // si le bouton n'est pas appuyé
+            LHeureActuelle.setText(montre.afficher());
             montre.tourner();
         }
-        while(!pasDeBoutonAppuyé){ // si bouton appuyé = réveil lancé
+
+        while (!pasDeBoutonAppuyé && composant_click==true) {
             Reveil reveil = new Reveil(hReveil, mReveil, sReveil, montre);
 
             //Sonnerie
-                SonnerieDeclenchable sonnerie = new SonnerieDeclenchable();
-                //reveil.addDeclenchable(sonnerie); //  1 on ajoute un déclenchable sonnerie qu'on utilisera, attention on ne peut instancier une classe abstraite
+            SonnerieDeclenchable sonnerie = new SonnerieDeclenchable();
+            //reveil.addDeclenchable(sonnerie); //  1 on ajoute un déclenchable sonnerie qu'on utilisera, attention on ne peut instancier une classe abstraite
 
 
             // Radio
-                RadioDeclenchable radio = new RadioDeclenchable();
-                //reveil.addDeclenchable(radio);
+            RadioDeclenchable radio = new RadioDeclenchable();
+            //            //reveil.addDeclenchable(radio);
 
             // cafetière
-                CafetiereDeclenchable cafetiere = new CafetiereDeclenchable();
-
-            if(addSonnerie && !addCafetiere && !addRadio){
+            CafetiereDeclenchable cafetiere = new CafetiereDeclenchable();
+            if (addSonnerie && !addCafetiere && !addRadio) {
                 reveil.addDeclenchable(sonnerie);
             }
-            if(addSonnerie && addRadio && !addCafetiere) {
+            if (addSonnerie && addRadio && !addCafetiere) {
                 reveil.addDeclenchable(sonnerie, radio);
             }
-            if(addSonnerie && !addRadio && addCafetiere) {
+            if (addSonnerie && !addRadio && addCafetiere) {
                 reveil.addDeclenchable(sonnerie, cafetiere);
             }
-            if(!addSonnerie && addRadio && !addCafetiere) {
+            if (!addSonnerie && addRadio && !addCafetiere) {
                 reveil.addDeclenchable(radio);
             }
-            if(!addSonnerie && !addRadio && addCafetiere) {
+            if (!addSonnerie && !addRadio && addCafetiere) {
                 reveil.addDeclenchable(cafetiere);
             }
-            if(!addSonnerie && addRadio && addCafetiere) {
+            if (!addSonnerie && addRadio && addCafetiere) {
                 reveil.addDeclenchable(radio, cafetiere);
             }
 
-            if(addSonnerie && addRadio && addCafetiere) {
+            if (addSonnerie && addRadio && addCafetiere) {
                 reveil.addDeclenchable(sonnerie, radio, cafetiere);
             }
-            while(!reveil.isActive){
-                Heure.setText(montre.afficher());
+            while (!reveil.isActive) {
+                LHeureActuelle.setText(montre.afficher());
                 reveil.incrementer();
-            }
-            Heure.setText("DRING DRING DRING");
         }
-    }
-}
 
+            if(reveil.isActive) {
+              LHeureActuelle.setText(montre.afficher());
+              montre.tourner();
 
-/*
+              /*if(test.getM()==1) {
+                  System.out.println("ok"); 
+              }*/
 
- Reveil reveil = new Reveil(1,1,6,montre);
+            System.out.println(radio.getM());
 
-        //Sonnerie
-        SonnerieDeclenchable sonnerie = new SonnerieDeclenchable();
-        //reveil.addDeclenchable(sonnerie); //  1 on ajoute un déclenchable sonnerie qu'on utilisera, attention on ne peut instancier une classe abstraite
+            if(radio.getM()==1){
+                LRadio.setText("Activation de la radio : Station SkyRock 100.2 lancée");
+                arrêterLaRadioCheckBox.setVisible(true);
 
-
-        // Radio
-        RadioDeclenchable radio = new RadioDeclenchable();
-        //reveil.addDeclenchable(radio);
-
-
-        // cafetière
-        CafetiereDeclenchable cafetiere = new CafetiereDeclenchable();
-        reveil.addDeclenchable(sonnerie);
-
-
-package com.company;
-
-import javax.swing.*;
-import java.awt.event.*;
-
-public class test extends JFrame {
-
-    public test() {
-        super("Reveil");
-
-        WindowListener l = new WindowAdapter() {
-            public void windowClosing(WindowEvent e){
-                System.exit(0);
             }
-        };
 
-        addWindowListener(l);
-        setSize(1000,500);
-        setVisible(true);
+            if(cafetiere.getM()==1){
+                LCafe.setText("Cafetière activé");
+
+
+
+            }
+
+                if(sonnerie.getM()==1){
+                    LSonnerie.setText("ring ring ring");
+                    arrêterLaSonnerieCheckBox.setVisible(true);
+                }
+
+
+                arrêterLaRadioCheckBox.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        System.out.println("julie");
+                        LRadio.setText("radio arrete");
+                        Fmessage_reveil.setText("");
+
+
+                    }
+                });
+                arrêterLaSonnerieCheckBox.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        System.out.println("hua");
+                        LSonnerie.setText("sonnerie arrete");
+                        Fmessage_reveil.setText("");
+                    }
+                });
+
+
+             /* if(addSonnerie) {
+
+
+              }
+              if(addCafetiere){
+
+              }
+              if(addSonnerie){
+
+              }*/ // we don't cheat anymore LMAO
+                }
+
+
+
+
+
+
+        }
+
+
+
     }
 
-    public static void main(String [] args){
-        JFrame frame = new test();
-    }
+
+
+
+
+
+           /*for(int i =0; i<2000000; i++) {
+                //TFHeureActuelle = new JTextField();
+               // TFHeureActuelle.setText(Integer.toString(j));
+               //TAHeureActuelle.append(montre.afficher());
+               LHeureActuelle.setText(montre.afficher());
+                montre.tourner();
+            }*/
+
+
+
+
 }
- */
