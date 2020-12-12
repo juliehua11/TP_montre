@@ -15,6 +15,5 @@ public abstract class Declenchable {
 
     public abstract void arreter();
 
-
     public abstract int getM();
 }

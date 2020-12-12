@@ -1,7 +1,5 @@
 package com.company.sonnerie;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 /*
     Author : Julien GODEST / Julie HUA
@@ -38,11 +36,6 @@ public class SonnerieClass implements Sonnerie {
     }
 
     public int getM() {
-
-        System.out.print(m);
         return m;
-
     }
-
-
 }

@@ -1,7 +1,6 @@
 package com.company;
 import java.io.IOException;
 
-
 /*
     Author : Julien GODEST / Julie HUA
     File : com.company.Montre.java

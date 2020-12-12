@@ -23,9 +23,7 @@ public class CafetiereClass implements Cafetiere { // RadioClass et RadioDeclenc
     }
 
     public int getM() {
-        System.out.print(m);
         return m;
-
     }
 
     public void arreter() {

@@ -22,12 +22,7 @@ public class RadioClass implements Radio {
     }
 
     public int getM() {
-
-
-
         return m;
-        //return m;
-
     }
 
     public void arreter() {
