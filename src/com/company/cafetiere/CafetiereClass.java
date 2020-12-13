@@ -9,21 +9,20 @@ package com.company.cafetiere;
 
 public class CafetiereClass implements Cafetiere { // RadioClass et RadioDeclenchable utilisent l'interface
 
-    private int m; // utilisation d'une variable,  qui va nous servir pour savoir si la procédure Declencher a été appelé ou non
+    private int ifDeclencher; // utilisation d'une variable,  qui va nous servir pour savoir si la procédure Declencher a été appelé ou non
 
-    public CafetiereClass(int m){
-        this.m = m;
+    public CafetiereClass(int ifDeclencher){
+        this.ifDeclencher = ifDeclencher;
     }// CafetiereClass et CafetiereDeclenchable utilisent l'interface
 
     public void declencher() {
-        this.m=1;
+        this.ifDeclencher=1;
         System.out.println("Démarrage de la cafetière");
         // 6 : on est ici, on a le code concret. cafetiere activé !!!
-
     }
 
-    public int getM() {
-        return m;
+    public int getIfDeclencher() {
+        return ifDeclencher;
     }
 
     public void arreter() {

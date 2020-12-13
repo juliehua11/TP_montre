@@ -47,14 +47,8 @@ public class Reveil extends Montre {
         this.montre.tourner();
         if (this.montre.getHeures() == this.h && this.montre.getMinutes() == this.m && this.montre.getSecondes() == this.s) {
             isActive = true;
-            try {
-                for (int i = 0; i < declenchable.length; i++) {
-                    declenchable[i].declencher(); // 3  on déclenche declenchable si le reveil doit sonner
-                }
-
-
-            } catch (Exception e) {
-               //  throw new IOException("Vous n'avez pas ajouté de déclenchable"); normalement l'exception est déjà géré
+            for (int i = 0; i < declenchable.length; i++) {
+                declenchable[i].declencher(); // 3  on déclenche declenchable si le reveil doit sonner
             }
         }
     }

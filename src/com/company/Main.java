@@ -152,16 +152,16 @@ public class Main extends JFrame {
               montre.tourner();
 
               // Affichage des messages des declencheurs sur l'interface visuelle
-                if(radio.getM()==1){
+                if(radio.getIfDeclencher()==1){
                     LRadio.setText("Activation de la radio : Station SkyRock 100.2 lancée");
                     arrêterLaRadioCheckBox.setVisible(true);
                 }
 
-                if(cafetiere.getM()==1){
+                if(cafetiere.getIfDeclencher()==1){
                     LCafe.setText("Cafetière activé");
                 }
 
-                if(sonnerie.getM()==1){
+                if(sonnerie.getIfDeclencher()==1){
                     LSonnerie.setText("ring ring ring");
                     arrêterLaSonnerieCheckBox.setVisible(true);
                 }

@@ -11,16 +11,16 @@ import java.io.IOException;
 
 public class SonnerieClass implements Sonnerie {
 
-    private int m ;
+    private int ifDeclencher ;
 
-    public SonnerieClass(int m) {
-        this.m = m;
+    public SonnerieClass(int ifDeclencher) {
+        this.ifDeclencher = ifDeclencher;
     }
 
     // SonnerieClass et SonnerieDeclenchable utilisent l'interface
 
     public void declencher() throws IOException {
-        this.m = 1;
+        this.ifDeclencher = 1;
         System.out.println("Ring ring ring..."); // 6 : on est ici, on a le code concret. Sonnerie activé !!!
         /*System.out.println("Si voulez arreter la sonnerie, tapez y + entrer");
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -35,7 +35,7 @@ public class SonnerieClass implements Sonnerie {
         System.out.println("Sonnerie arretée.");
     }
 
-    public int getM() {
-        return m;
+    public int getIfDeclencher() {
+        return ifDeclencher;
     }
 }

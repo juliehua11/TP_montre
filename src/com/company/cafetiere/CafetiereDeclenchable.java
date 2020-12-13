@@ -27,9 +27,7 @@ public class CafetiereDeclenchable  extends Declenchable implements Cafetiere { 
     }
 
     @Override
-    public int  getM() {
-
-          return  monCafe.getM();
-
+    public int  getIfDeclencher() {
+          return  monCafe.getIfDeclencher();
     }
 }

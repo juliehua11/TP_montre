@@ -28,9 +28,7 @@ public class RadioDeclenchable  extends Declenchable implements Radio { // Radio
     }
 
     @Override
-    public int getM() {
-        return maRadio.getM();
+    public int getIfDeclencher() {
+        return maRadio.getIfDeclencher();
     }
-
-
 }

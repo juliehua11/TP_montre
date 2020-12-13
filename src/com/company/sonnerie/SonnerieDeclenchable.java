@@ -28,7 +28,7 @@ public class SonnerieDeclenchable  extends Declenchable implements Sonnerie { //
         maSonnerie.arreter();
     }
 
-    public int getM() {
-        return maSonnerie.getM();
+    public int getIfDeclencher() {
+        return maSonnerie.getIfDeclencher();
     }
 }
